@@ -1,20 +1,24 @@
 NAME = push_swap
 
-CC = clang
+CC = gcc
 
 SRCS =	push_swap.c\
 		push_swap_utils.c
-
+		
 OBJS = $(SRCS:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJS) 
+$(NAME): libft $(OBJS) 
+	$(CC) -g $(FLAGS) $(OBJS) -o $(NAME) -I . -L ./libft -lft
+
+libft:
+	make -C ./libft
 
 .c.o:
-	$(CC) $(FLAGS) -c $< -o $@ 
+	$(CC) -g $(FLAGS) -c $< -o $@ -I . -L ./libft -lft
 
 clean:
 	rm -f $(OBJS)
@@ -25,4 +29,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: clean all re fclean
+.PHONY: clean all re fclean libft
