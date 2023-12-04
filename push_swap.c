@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marde-vr <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2023/11/28 17:22:36 by marde-vr         ###   ########.fr       */
+/*   Updated: 2023/12/02 23:15:57 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,49 +42,14 @@ t_stack	*stack_init(int stack_len, int *tab)
 	return (stack_a);
 }
 
-int	*expand_tab(int *tab_dest, char **tab_src)
+
+int *split_argv(int argc, char**argv)
 {
-	int	i;
-	int	j;
-	int	tab_dest_len;
-	int	tab_src_len;
-	int	*tab;
+    int *tab;
 
-	tab_dest_len = tab_dest[0];
-	tab_src_len = ft_atoi(tab_src[0]);
-	tab = malloc(tab_src_len + tab_dest_len * sizeof(int));
-	if (!tab)
-		return (NULL);
-	ft_memcpy(tab, tab_dest, tab_dest_len);
-	i = tab_dest_len;
-	j = 1;
-	while (/*i <= tab_src_len + tab_dest_len*/ j <= tab_dest_len)
-	{
-		tab[i] = ft_atoi(tab_src[j]);
-		i++;
-		j++;
-	}
-	free(tab_dest);
-	free(tab_src);
-	return (tab);
-}
+    tab = ft_split(argv, " ");
 
-int	*split_argv(int argc, char **argv)
-{
-	int	*tab;
-	int	i;
-
-	tab = malloc(sizeof(int) * argc);
-	if (!tab)
-		return (NULL);
-	tab[0] = argc - 1;
-	i = 1;
-	while (i < argc)
-	{
-		expand_tab(tab, ft_split(argv[i], ' '));
-		i++;
-	}
-	return (tab);
+    return ()
 }
 
 int	main(int argc, char **argv)
