@@ -5,8 +5,11 @@ CC = clang
 SRCS =	push_swap.c\
 		stack_utils.c\
 		parsing.c\
-		error_handling.c
-		
+		push.c\
+		swap.c\
+		rotate.c\
+		rrotate.c
+
 OBJS = $(SRCS:.c=.o)
 LIBFT = libft/libft.a
 FLAGS = -Wall -Wextra -Werror -g

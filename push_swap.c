@@ -6,11 +6,10 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/18 18:08:48 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/18 21:24:15 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "push_swap.h"
 
 void	print_stack(t_stack *stack)
@@ -26,6 +25,12 @@ void	print_stack(t_stack *stack)
 		node = node->next;
 	}
 	ft_printf("%d\n", node->value);
+}
+
+int	ft_error(void)
+{
+	ft_printf("Error\n");
+	return (0);
 }
 
 void	push_swap(t_stack *a, t_stack *b)
