@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:16:37 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/17 15:18:41 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:27:35 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_stack
 
 t_stack_node	*new_node(int value);
 t_stack			*new_stack(void);
-int				ft_error(int error_code);
+int				ft_error(void);
 int				parse_argv(int argc, char **argv, t_stack *a);
 
 #endif
