@@ -6,16 +6,16 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/18 20:01:14 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/18 20:04:10 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "push_swap.h"
 
-int check_if_str_is_valid(char *str)
+int	check_if_str_is_valid(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
