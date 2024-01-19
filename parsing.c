@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/19 17:45:26 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/19 19:30:29 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,34 +54,31 @@ int	convert_to_int(char **char_tab, int *int_tab)
 	return (0);
 }
 
-int	fill_stack(int *tab, t_stack *a)
+int	fill_stack(int *tab, t_stack **a)
 {
-	int				i;
-	t_stack_node	*tmp;
+	int		i;
+	t_stack	*node;
 
 	if (!tab || !a)
 		return (1);
 	i = -1;
 	while (tab[++i])
 	{
-		if (!a->first)
+		if (!a)
 		{
-			tmp = ft_calloc(1, sizeof(t_stack_node));
-			if (!tmp)
+			node = ft_calloc(1, sizeof(t_stack));
+			if (!node)
 				return (1);
-			tmp->prev = tmp;
-			tmp->value = tab[i];
-			a->first = tmp;
-			a->last = tmp;
+			node->value = tab[i];
+			*a = node;
 		}
 		else
 		{
-			a->last->next = ft_calloc(1, sizeof(t_stack_node));
-			if (!a->last->next)
+			node->next = ft_calloc(1, sizeof(t_stack));
+			if (!node->next)
 				return (1);
-			a->last->next->prev = a->last;
-			a->last->next->value = tab[i];
-			a->last = a->last->next;
+			node->next->value = tab[i];
+			node = node->next;
 		}
 	}
 	return (0);
@@ -102,7 +99,7 @@ int	free_tabs(char **char_tab, int *int_tab, int error)
 	return (error);
 }
 
-int	add_arg_to_stack(char *arg, t_stack *a)
+int	add_arg_to_stack(char *arg, t_stack **a)
 {
 	char	**char_tab;
 	int		*int_tab;
@@ -131,10 +128,10 @@ int	add_arg_to_stack(char *arg, t_stack *a)
 
 int	check_for_duplicates(t_stack *stack)
 {
-	t_stack_node	*node1;
-	t_stack_node	*node2;
+	t_stack	*node1;
+	t_stack	*node2;
 
-	node1 = stack->first;
+	node1 = stack;
 	while (node1->next)
 	{
 		node2 = node1->next;
@@ -153,24 +150,24 @@ int	check_for_duplicates(t_stack *stack)
 
 int	parse_argv(int argc, char **argv, t_stack *a)
 {
-	int				i;
-	t_stack_node	*node;
+	int		i;
+	t_stack	*node;
 
 	i = argc - 1;
 	while (i > 0)
 	{
-		if (add_arg_to_stack(argv[i], a))
+		if (add_arg_to_stack(argv[i], &a))
 			return (1);
 		i--;
 	}
-	if (a->first)
+	if (a)
 	{
 		if (check_for_duplicates(a))
 			return (1);
-		node = a->first;
+		node = a;
 		while (node->next)
 			node = node->next;
-		node->next = a->first;
+		node->next = a;
 	}
 	return (0);
 }
