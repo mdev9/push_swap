@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/19 17:15:31 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:45:26 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	fill_stack(int *tab, t_stack *a)
 		else
 		{
 			a->last->next = ft_calloc(1, sizeof(t_stack_node));
-			if (!tmp)
+			if (!a->last->next)
 				return (1);
 			a->last->next->prev = a->last;
 			a->last->next->value = tab[i];
@@ -129,28 +129,48 @@ int	add_arg_to_stack(char *arg, t_stack *a)
 	return (free_tabs(char_tab, int_tab, 0));
 }
 
+int	check_for_duplicates(t_stack *stack)
+{
+	t_stack_node	*node1;
+	t_stack_node	*node2;
+
+	node1 = stack->first;
+	while (node1->next)
+	{
+		node2 = node1->next;
+		while (node2->next)
+		{
+			if (node1->value == node2->value)
+				return (1);
+			node2 = node2->next;
+		}
+		if (node1->value == node2->value)
+			return (1);
+		node1 = node1->next;
+	}
+	return (0);
+}
+
 int	parse_argv(int argc, char **argv, t_stack *a)
 {
 	int				i;
-	int				error;
 	t_stack_node	*node;
 
 	i = argc - 1;
 	while (i > 0)
 	{
-		error = add_arg_to_stack(argv[i], a);
-		if (error)
-			return (error);
+		if (add_arg_to_stack(argv[i], a))
+			return (1);
 		i--;
 	}
 	if (a->first)
 	{
+		if (check_for_duplicates(a))
+			return (1);
 		node = a->first;
 		while (node->next)
 			node = node->next;
 		node->next = a->first;
 	}
-	//check if there are any duplicates in stack
-	//todo
 	return (0);
 }

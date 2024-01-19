@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/19 17:11:09 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:51:49 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,6 @@ void	print_stack(t_stack *stack)
 	ft_printf("%d\n", node->value);
 }
 
-int	ft_error(t_stack *stack_a, t_stack *stack_b)
-{
-	ft_printf("Error\n");
-	free(stack_a);
-	free(stack_b);
-	return (0);
-}
-
 void	push_swap(t_stack *a, t_stack *b)
 {
 	(void)(a);
@@ -48,6 +40,8 @@ void	free_stack(t_stack *stack)
 	t_stack_node	*tmp;
 	t_stack_node	*first;
 
+	if (!stack)
+		return ;
 	if (stack->first)
 	{
 		first = stack->first;
@@ -58,14 +52,23 @@ void	free_stack(t_stack *stack)
 			free(node);
 			node = tmp;
 		}
+		if (node != first)
+			free(node);
 		free(first);
 	}
 	free(stack);
 }
 
+int	ft_error(t_stack *stack_a, t_stack *stack_b)
+{
+	ft_printf("Error\n");
+	free_stack(stack_a);
+	free_stack(stack_b);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
-	int		error;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
@@ -73,8 +76,7 @@ int	main(int argc, char **argv)
 	stack_b = ft_calloc(1, sizeof(t_stack));
 	if (!stack_a || !stack_b)
 		return (ft_error(stack_a, stack_b));
-	error = parse_argv(argc, argv, stack_a);
-	if (error)
+	if (parse_argv(argc, argv, stack_a))
 		return (ft_error(stack_a, stack_b));
 	print_stack(stack_a);
 	//push_swap(stack_a, stack_b);
