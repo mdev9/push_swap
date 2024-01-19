@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/18 20:04:10 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:15:31 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	fill_stack(int *tab, t_stack *a)
 		if (!a->first)
 		{
 			tmp = ft_calloc(1, sizeof(t_stack_node));
+			if (!tmp)
+				return (1);
 			tmp->prev = tmp;
 			tmp->value = tab[i];
 			a->first = tmp;
@@ -75,6 +77,8 @@ int	fill_stack(int *tab, t_stack *a)
 		else
 		{
 			a->last->next = ft_calloc(1, sizeof(t_stack_node));
+			if (!tmp)
+				return (1);
 			a->last->next->prev = a->last;
 			a->last->next->value = tab[i];
 			a->last = a->last->next;
@@ -83,31 +87,53 @@ int	fill_stack(int *tab, t_stack *a)
 	return (0);
 }
 
+int	free_tabs(char **char_tab, int *int_tab, int error)
+{
+	int	i;
+
+	i = 0;
+	while (char_tab[i])
+	{
+		free(char_tab[i]);
+		i++;
+	}
+	free(char_tab);
+	free(int_tab);
+	return (error);
+}
+
 int	add_arg_to_stack(char *arg, t_stack *a)
 {
 	char	**char_tab;
 	int		*int_tab;
-	int		error;
+	int		size;
 
 	char_tab = ft_split(arg, ' ');
+	size = 0;
+	while (char_tab[size])
+		size++;
 	if (!char_tab)
 		return (1);
 	if (!*char_tab)
+	{
+		free(char_tab);
 		return (0);
-	int_tab = ft_calloc(1, sizeof(int *));
-	error = convert_to_int(char_tab, int_tab);
-	if (error)
-		return (error);
-	error = fill_stack(int_tab, a);
-	if (error)
-		return (error);
-	return (0);
+	}
+	int_tab = ft_calloc(size + 1, sizeof(int *));
+	if (!int_tab)
+		return (free_tabs(char_tab, int_tab, 1));
+	if (convert_to_int(char_tab, int_tab))
+		return (free_tabs(char_tab, int_tab, 1));
+	if (fill_stack(int_tab, a))
+		return (free_tabs(char_tab, int_tab, 1));
+	return (free_tabs(char_tab, int_tab, 0));
 }
 
 int	parse_argv(int argc, char **argv, t_stack *a)
 {
-	int	i;
-	int	error;
+	int				i;
+	int				error;
+	t_stack_node	*node;
 
 	i = argc - 1;
 	while (i > 0)
@@ -116,6 +142,13 @@ int	parse_argv(int argc, char **argv, t_stack *a)
 		if (error)
 			return (error);
 		i--;
+	}
+	if (a->first)
+	{
+		node = a->first;
+		while (node->next)
+			node = node->next;
+		node->next = a->first;
 	}
 	//check if there are any duplicates in stack
 	//todo
