@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/19 19:25:56 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/20 12:59:10 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,21 @@ int	ft_error(t_stack *stack_a, t_stack *stack_b)
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
+	t_stacks	*stacks;
+	t_stack		*stack_a;
+	t_stack		*stack_b;
 
 	stack_a = 0;
 	stack_b = ft_calloc(1, sizeof(t_stack));
 	if (!stack_b)
 		return (ft_error(stack_a, stack_b));
-	if (parse_argv(argc, argv, stack_a))
+	stacks->a = stack_a;
+	stacks->b = stack_b;
+	if (parse_argv(argc, argv, &stack_a))
 		return (ft_error(stack_a, stack_b));
+	print_stack(stack_a);
+	ft_printf("sa");
+	sa(stacks);
 	print_stack(stack_a);
 	//push_swap(stack_a, stack_b);
 	free_stack(stack_a);

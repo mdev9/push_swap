@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/19 19:30:29 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/20 11:33:26 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,12 @@ int	fill_stack(int *tab, t_stack **a)
 	int		i;
 	t_stack	*node;
 
-	if (!tab || !a)
+	if (!tab)
 		return (1);
 	i = -1;
 	while (tab[++i])
 	{
-		if (!a)
+		if (!*a)
 		{
 			node = ft_calloc(1, sizeof(t_stack));
 			if (!node)
@@ -74,11 +74,13 @@ int	fill_stack(int *tab, t_stack **a)
 		}
 		else
 		{
+			node = *a;
+			while (node->next)
+				node = node->next;
 			node->next = ft_calloc(1, sizeof(t_stack));
 			if (!node->next)
 				return (1);
 			node->next->value = tab[i];
-			node = node->next;
 		}
 	}
 	return (0);
@@ -148,7 +150,7 @@ int	check_for_duplicates(t_stack *stack)
 	return (0);
 }
 
-int	parse_argv(int argc, char **argv, t_stack *a)
+int	parse_argv(int argc, char **argv, t_stack **a)
 {
 	int		i;
 	t_stack	*node;
@@ -156,18 +158,18 @@ int	parse_argv(int argc, char **argv, t_stack *a)
 	i = argc - 1;
 	while (i > 0)
 	{
-		if (add_arg_to_stack(argv[i], &a))
+		if (add_arg_to_stack(argv[i], a))
 			return (1);
 		i--;
 	}
 	if (a)
 	{
-		if (check_for_duplicates(a))
+		if (check_for_duplicates(*a))
 			return (1);
-		node = a;
+		node = *a;
 		while (node->next)
 			node = node->next;
-		node->next = a;
+		node->next = *a;
 	}
 	return (0);
 }
