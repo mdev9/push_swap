@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:21:58 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/21 22:02:43 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:07:26 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b);
 
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
-	t_stack *first_a;
+	t_stack	*first_a;
 	t_stack	*first_b;
 	t_stack	*tmp;
 

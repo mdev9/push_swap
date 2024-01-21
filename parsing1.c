@@ -1,56 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/20 11:33:26 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:26:43 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "push_swap.h"
 
-int	check_if_str_is_valid(char *str)
+int	new_node(int value, t_stack **new)
 {
-	int	i;
+	t_stack	*node;
 
-	i = 0;
-	while (str[i])
-	{
-		if (!(ft_isdigit(str[i]) || str[i] == '-'))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-int	convert_to_int(char **char_tab, int *int_tab)
-{
-	int			i;
-	int			j;
-	long long	nb;
-
-	if (!char_tab || !int_tab)
+	*new = ft_calloc(1, sizeof(t_stack));
+	if (!new)
 		return (1);
-	i = 0;
-	while (char_tab[i])
-		i++;
-	i--;
-	j = 0;
-	while (i >= 0)
-	{
-		if (check_if_str_is_valid(char_tab[i]))
-			return (1);
-		nb = ft_atoi(char_tab[i]);
-		if (nb > 2147483647 || nb < -2147483648)
-			return (1);
-		int_tab[j] = nb;
-		i--;
-		j++;
-	}
+	node = *new;
+	node->value = value;
 	return (0);
 }
 
@@ -66,39 +37,21 @@ int	fill_stack(int *tab, t_stack **a)
 	{
 		if (!*a)
 		{
-			node = ft_calloc(1, sizeof(t_stack));
-			if (!node)
+			new_node(tab[i], a);
+			if (!a)
 				return (1);
-			node->value = tab[i];
-			*a = node;
 		}
 		else
 		{
 			node = *a;
 			while (node->next)
 				node = node->next;
-			node->next = ft_calloc(1, sizeof(t_stack));
+			new_node(tab[i], &node->next);
 			if (!node->next)
 				return (1);
-			node->next->value = tab[i];
 		}
 	}
 	return (0);
-}
-
-int	free_tabs(char **char_tab, int *int_tab, int error)
-{
-	int	i;
-
-	i = 0;
-	while (char_tab[i])
-	{
-		free(char_tab[i]);
-		i++;
-	}
-	free(char_tab);
-	free(int_tab);
-	return (error);
 }
 
 int	add_arg_to_stack(char *arg, t_stack **a)
@@ -128,28 +81,6 @@ int	add_arg_to_stack(char *arg, t_stack **a)
 	return (free_tabs(char_tab, int_tab, 0));
 }
 
-int	check_for_duplicates(t_stack *stack)
-{
-	t_stack	*node1;
-	t_stack	*node2;
-
-	node1 = stack;
-	while (node1->next)
-	{
-		node2 = node1->next;
-		while (node2->next)
-		{
-			if (node1->value == node2->value)
-				return (1);
-			node2 = node2->next;
-		}
-		if (node1->value == node2->value)
-			return (1);
-		node1 = node1->next;
-	}
-	return (0);
-}
-
 int	parse_argv(int argc, char **argv, t_stack **a)
 {
 	int		i;
@@ -162,7 +93,7 @@ int	parse_argv(int argc, char **argv, t_stack **a)
 			return (1);
 		i--;
 	}
-	if (a)
+	if (*a)
 	{
 		if (check_for_duplicates(*a))
 			return (1);

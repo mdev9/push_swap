@@ -3,7 +3,9 @@ NAME = push_swap
 CC = clang
 
 SRCS =	push_swap.c\
-		parsing.c\
+		push_swap_utils.c\
+		parsing1.c\
+		parsing2.c\
 		push.c\
 		swap.c\
 		rotate.c\
