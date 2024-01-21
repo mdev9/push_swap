@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:16:37 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/20 13:23:29 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/21 17:42:03 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,19 @@ typedef struct s_stack
 	//struct s_stack_node *prev;
 }	t_stack;
 
-typedef struct s_stacks
-{
-	struct s_stack		*a;
-	struct s_stack		*b;
-}	t_stacks;
-
-int				parse_argv(int argc, char **argv, t_stack **a);
-int				ft_error(t_stack *stack_a, t_stack *stack_b);
-void			sa(t_stacks *stacks);
-void			sb(t_stacks *stacks);
-void			ss(t_stacks *stacks);
-void			pa(t_stacks *stacks);
-void			pb(t_stacks *stacks);
+int		parse_argv(int argc, char **argv, t_stack **a);
+int		ft_error(t_stack *stack_a, t_stack *stack_b);
+int		stack_size(t_stack **stack);
+void	sa(t_stack **stack_a);
+void	sb(t_stack **stack_b);
+void	ss(t_stack **stack_a, t_stack **stack_b);
+void	pa(t_stack **stack_a, t_stack **stack_b);
+void	pb(t_stack **stack_a, t_stack **stack_b);
+void	ra(t_stack **stack_a);
+void	rb(t_stack **stack_b);
+void	rr(t_stack **stack_a, t_stack **stack_b);
+void	rra(t_stack **stack_a);
+void	rrb(t_stack **stack_b);
+void	rrr(t_stack **stack_a, t_stack **stack_b);
 
 #endif
