@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:16:37 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/21 17:42:03 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:02:17 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_stack
 
 int		parse_argv(int argc, char **argv, t_stack **a);
 int		ft_error(t_stack *stack_a, t_stack *stack_b);
+void	print_stack(t_stack *stack);
 int		stack_size(t_stack **stack);
 void	sa(t_stack **stack_a);
 void	sb(t_stack **stack_b);

@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/21 20:32:38 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/21 21:56:48 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,6 @@ int	main(int argc, char **argv)
 		return (ft_error(stack_a, stack_b));
 	ft_printf("stack_a: ");
 	print_stack(stack_a);
-	//pa(&stack_a, &stack_b);
-	ft_printf("pb\n");
-	//ft_printf("pb\n");
-	//pb(&stack_a, &stack_b);
-	pb(&stack_a, &stack_b);
-	ft_printf("stack_a: ");
-	print_stack(stack_a);
-	ft_printf("stack_b: ");
-	print_stack(stack_b);
 	//push_swap(stack_a, stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);

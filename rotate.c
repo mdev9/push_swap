@@ -6,30 +6,38 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:22:04 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/20 15:35:28 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/21 22:04:10 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
-void	ra(t_stacks *stacks)
+void	ra(t_stack **stack_a)
 {
-	t_stack *node;
 	t_stack *first;
-	t_stack	*second;
-	t_stack *last;
 
-	node = stacks->a;
-	while (node->next->next != stacks->a)
-		node = node->next;
-	first = node;
-	last = stacks->a;
-	
-	
-
+	first = *stack_a;
+	while (first->next != *stack_a)
+		first = first->next;
+	*stack_a = first;
+	ft_printf("ra	stack_a: ");
+	print_stack(*stack_a);
 }
-*/
 
-// 1->2->3->1...
-//
+void	rb(t_stack **stack_b)
+{
+	t_stack *first;
+
+	first = *stack_b;
+	while (first->next != *stack_b)
+		first = first->next;
+	*stack_b = first;
+	ft_printf("rb	stack_b: ");
+	print_stack(*stack_b);
+}
+
+void	rr(t_stack **stack_a, t_stack **stack_b)
+{
+	ra(stack_a);
+	rb(stack_b);
+}
