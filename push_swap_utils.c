@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:29:04 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/21 22:29:58 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:36:34 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,18 @@ int	ft_error(t_stack *stack_a, t_stack *stack_b)
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
+}
+
+int	stack_is_sorted(t_stack *stack)
+{
+	t_stack *node;
+
+	node = stack;
+	while (node->next != stack)
+	{
+		if (node->next->value > node->value)
+			return (0);
+		node = node->next;
+	}
+	return (1);
 }

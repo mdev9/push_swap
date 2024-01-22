@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:21:58 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/21 22:07:26 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:33:58 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 	tmp = *stack_a;
 	if (tmp->value == first_b->value)
 		*stack_a = 0;
-	ft_printf("pb	stack_a: ");
+	ft_printf("pb	a: ");
 	print_stack(*stack_a);
-	ft_printf("stack_b: ");
+	ft_printf("b: ");
 	print_stack(*stack_b);
 }

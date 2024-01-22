@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:21:53 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/21 22:03:46 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/22 21:34:13 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,14 @@ void	swap(t_stack **stack)
 void	sa(t_stack **stack_a)
 {
 	swap(stack_a);
-	ft_printf("sa	stack_a: ");
+	ft_printf("sa	a: ");
 	print_stack(*stack_a);
 }
 
 void	sb(t_stack **stack_b)
 {
 	swap(stack_b);
-	ft_printf("sb	stack_b: ");
+	ft_printf("sb	b: ");
 	print_stack(*stack_b);
 }
 
