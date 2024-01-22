@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/22 10:48:26 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/22 14:15:01 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,18 @@ t_stack	*top_node(t_stack *stack)
 {
 	if (!stack)
 		return (NULL);
-	while (stack->next != *stack)
+	while (stack->next != stack)
 		stack = stack->next;
 	return (stack);
 }
 
-void	push_swap(t_stack *a, t_stack *b)
+int	calculate_cost(t_stack *stack_a, t_stack *stack_b)
+{
+	
+
+}
+
+void	push_swap(t_stack **a, t_stack **b)
 {
 	t_stack	*node;
 	int lowest_cost;
@@ -51,7 +57,6 @@ void	push_swap(t_stack *a, t_stack *b)
 			pb(a, b);
 			if (first_a->value < *b->value)
 				rb(b);
-
 		}
 	}*/
 	return ;
@@ -68,7 +73,7 @@ int	main(int argc, char **argv)
 		return (ft_error(stack_a, stack_b));
 	ft_printf("stack_a: ");
 	print_stack(stack_a);
-	// push_swap(stack_a, stack_b);
+	push_swap(&stack_a, &stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
