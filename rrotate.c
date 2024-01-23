@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:22:24 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/22 21:34:33 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:35:06 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 void	rra(t_stack **stack_a)
 {
-	t_stack	*last;
+//	t_stack	*last;
+//	t_stack	*first;
 
-	last = *stack_a;
-	*stack_a = last->next;
-	ft_printf("rra	a: ");
-	print_stack(*stack_a);
+//	last = *stack_a;
+//	first = *stack_a;
+//	while (first->next != *stack_a)
+//		first = first->next;
+	*stack_a = (*stack_a)->next;
+	ft_printf("rra\n");
 }
 
 void	rrb(t_stack **stack_b)
@@ -28,12 +31,16 @@ void	rrb(t_stack **stack_b)
 
 	last = *stack_b;
 	*stack_b = last->next;
-	ft_printf("rrb	b: ");
-	print_stack(*stack_b);
+	ft_printf("rrb\n");
 }
 
 void	rrr(t_stack **stack_a, t_stack **stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	t_stack	*last;
+
+	last = *stack_a;
+	*stack_a = last->next;
+	last = *stack_b;
+	*stack_b = last->next;
+	ft_printf("rrr\n");
 }

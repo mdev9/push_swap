@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/22 21:38:56 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:43:13 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,31 @@ t_stack	*stack_max(t_stack *stack)
 
 void	sort_stack_of_size_3(t_stack **stack_a)
 {
-	t_stack *a;
 	int first;
 	int second;
 	int last;
 
-	a = *stack_a;
-	first = a->next->next->value;
-	second = a->next->value;
-	last = a->value;
+	first = (*stack_a)->next->next->value;
+	second = (*stack_a)->next->value;
+	last = (*stack_a)->value;
 	if (first < second && second > last && last > first)
 	{
-		sa(&a);
-		ra(&a);
+		sa(stack_a);
+		print_stack(*stack_a);
+		ra(stack_a);
 	}
 	else if (first > second && second > last && last < first)
 	{
-		sa(&a);
-		rra(&a);
+		sa(stack_a);
+		print_stack(*stack_a);
+		rra(stack_a);
 	}
 	else if (first > second && second < last && last > first)
-		sa(&a);
+		sa(stack_a);
 	else if (first > second && second < last && last < first)
-		ra(&a);
+		ra(stack_a);
 	else if (first < second && second > last && last < first)
-		rra(&a);
+		rra(stack_a);
 }
 
 /*
@@ -145,6 +145,7 @@ int	main(int argc, char **argv)
 	print_stack(stack_a);
 	ft_printf("stack sorted: %d\n", stack_is_sorted(stack_a));
 	push_swap(&stack_a, &stack_b);
+	print_stack(stack_a);
 	ft_printf("stack sorted: %d\n", stack_is_sorted(stack_a));
 	free_stack(stack_a);
 	free_stack(stack_b);
