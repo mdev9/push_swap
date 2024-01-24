@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:16:37 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/22 21:31:32 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:27:22 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,8 @@ void	rr(t_stack **stack_a, t_stack **stack_b);
 void	rra(t_stack **stack_a);
 void	rrb(t_stack **stack_b);
 void	rrr(t_stack **stack_a, t_stack **stack_b);
+
+
+void			print_stacks(t_stack *stack_a, t_stack *stack_b);
 
 #endif

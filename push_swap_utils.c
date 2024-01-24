@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:29:04 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/22 21:36:34 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:41:08 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ void	print_stack(t_stack *stack)
 		node = node->next;
 	}
 	ft_printf("%d\n", node->value);
+}
+
+void	print_stacks(t_stack *stack_a, t_stack *stack_b)
+{
+	ft_printf("a: ");
+	print_stack(stack_a);
+	ft_printf("b: ");
+	print_stack(stack_b);
+	ft_printf("\n");
 }
 
 int	stack_size(t_stack **stack)
