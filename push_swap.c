@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/23 21:43:13 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:08:52 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_stack	*top_node(t_stack *stack)
 
 t_stack	*stack_min(t_stack *stack)
 {
-	t_stack *node;
+	t_stack	*node;
 
 	node = stack;
 	while (node->next->value < node->value)
@@ -33,7 +33,7 @@ t_stack	*stack_min(t_stack *stack)
 
 t_stack	*stack_max(t_stack *stack)
 {
-	t_stack *node;
+	t_stack	*node;
 
 	node = stack;
 	while (node->next->value > node->value)
@@ -43,9 +43,9 @@ t_stack	*stack_max(t_stack *stack)
 
 void	sort_stack_of_size_3(t_stack **stack_a)
 {
-	int first;
-	int second;
-	int last;
+	int	first;
+	int	second;
+	int	last;
 
 	first = (*stack_a)->next->next->value;
 	second = (*stack_a)->next->value;
@@ -70,48 +70,82 @@ void	sort_stack_of_size_3(t_stack **stack_a)
 		rra(stack_a);
 }
 
-/*
-int	calculate_cost(t_stack *stack_a, t_stack *stack_b)
+int	calc_rotations(t_stack *stack, int value)
 {
-	t_stack *first_a;
-	t_stack *min;
-	t_stack *max;
+	t_stack	*node;
+	int		i;
 
-	first_a = top_node(stack_a);
-	min = stack_min(stack_b);
-	max = stack_max(stack_b);
-	if (first_a->value > max->value || first_a->value < min->value)
-		return (1);
+	i = 0;
+	node = stack;
+	while (node->value != value)
+	{
+		node = node->next;
+		i++;
+	}
+	return (stack_size(&stack) - i);
+}
+
+int	total_cost(int a, int b)
+{
+	int	cost;
+
+	cost = 1;
+	if (a > b)
+		cost += a - b;
+	else if (a < b)
+		cost += a + b;
+	return (cost);
+}
+
+int	calculate_cost(int node_i, t_stack *stack_a, t_stack *stack_b)
+{
+	t_stack	*node;
+	int min;
+	int max;
+	int		i;
+
+	i = 0;
+	node = stack_a;
+	while (i < node_i)
+	{
+		node = node->next;
+		i++;
+	}
+	min = stack_min(stack_b)->value;
+	max = stack_max(stack_b)->value;
+	if (node->value > max || node->value < min)
+		return (total_cost(calc_rotations(stack_a, node_i), calc_rotations(stack_b, max)));
 	return (1);
 }
 
-void	push_node(t_stack *node, t_stack **stack_a, t_stack **stack_b)
-{
-	t_stack *top
-}
+//void	push_node(t_stack *node, t_stack **stack_a, t_stack **stack_b);
 
 void	sort_stack(t_stack **a, t_stack **b)
 {
-	t_stack	*node;
-	int lowest_cost;
-	int	curr_cost;
+	int		lowest_cost;
+	int		curr_cost;
+	int		i;
 
 	pb(a, b);
 	pb(a, b);
-	lowest_cost = calculate_cost(node, *b);
+	lowest_cost = calculate_cost(stack_size(a), *a, *b);
 	while (stack_size(a) == 3)
 	{
-		node = *a;
-		while (node->next != *a)
+		i = stack_size(a);
+		while (i > 0)
 		{
-			node = node->next;
-			curr_cost = calculate_cost(node, *b);
-			if (curr_cost < lowest_cost || curr_cost == 1)
-				push_node(node, a, b);
+			curr_cost = calculate_cost(i, *a, *b);
+			ft_printf("i: %d, cost: %d\n", i, curr_cost);
+			if (curr_cost < lowest_cost)
+				lowest_cost = curr_cost;
+			if (curr_cost == 1)
+				break ;
+			i--;
 		}
+		//push_node(node, a, b);
 	}
 	sort_stack_of_size_3(a);
-}*/
+}
 
 void	push_swap(t_stack **a, t_stack **b)
 {
@@ -127,8 +161,8 @@ void	push_swap(t_stack **a, t_stack **b)
 		sort_stack_of_size_3(a);
 		return ;
 	}
-	//else
-	//	sort_stack(a, b);
+	else
+		sort_stack(a, b);
 	(void)b;
 }
 
