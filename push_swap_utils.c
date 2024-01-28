@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:29:04 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/24 13:41:08 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/27 13:49:58 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,15 @@ int	stack_is_sorted(t_stack *stack)
 {
 	t_stack *node;
 
-	node = stack;
-	while (node->next != stack)
+	if (stack)
 	{
-		if (node->next->value > node->value)
-			return (0);
-		node = node->next;
+		node = stack;
+		while (node->next != stack)
+		{
+			if (node->next->value > node->value)
+				return (0);
+			node = node->next;
+		}
 	}
 	return (1);
 }

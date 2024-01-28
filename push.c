@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:21:58 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/24 16:50:37 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/28 12:27:29 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 	t_stack	*first_a;
 	t_stack	*first_b;
 	t_stack	*tmp;
+	int		size;
 
-	if (stack_size(stack_a) == 0)
+	size = stack_size(stack_a);
+	if (!size)
 		return ;
 	tmp = *stack_a;
 	while (tmp->next->next != *stack_a)
@@ -62,9 +64,7 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 	tmp->next = *stack_a;
 	if (*stack_b)
 	{
-		first_b = *stack_b;
-		while (first_b->next->next != *stack_b)
-			first_b = first_b->next;
+		first_b = top_node(*stack_b);
 		first_a->next = *stack_b;
 		first_b->next = first_a;
 	}
@@ -74,8 +74,7 @@ void	pb(t_stack **stack_a, t_stack **stack_b)
 		*stack_b = first_b;
 		first_b->next = *stack_b;
 	}
-	tmp = *stack_a;
-	if (tmp->value == first_b->value)
+	if (size == 1)
 		*stack_a = 0;
 	ft_printf("pb\n");
 }

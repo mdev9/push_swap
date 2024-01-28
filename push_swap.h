@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:16:37 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/24 13:27:22 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/28 12:26:20 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		convert_to_int(char **char_tab, int *int_tab);
 int		stack_size(t_stack **stack);
 int		stack_is_sorted(t_stack *stack);
 int		free_tabs(char **char_tab, int *int_tab, int error);
+t_stack	*top_node(t_stack *stack);
 void	free_stack(t_stack *stack);
 void	print_stack(t_stack *stack);
 void	sa(t_stack **stack_a);
