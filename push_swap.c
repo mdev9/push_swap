@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/29 16:33:21 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:43:55 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,13 @@ int	rotations_to_top_count(int number, t_stack *stack)
 
 	count = 0;
 	current = stack;
-	while (current && ((current->value < number
-				&& current->next->value > number)
-			|| (current->value > current->next->value
-				&& (number > current->value || number < current->next->value))))
+	while (current->next->value != number)
+		current = current->next;
+	while (current->next != stack)
 	{
 		current = current->next;
 		count++;
-	} //change this bs
+	}
 	return (count);
 }
 
@@ -101,7 +100,7 @@ int	calculate_cost(int number, t_stack *a, t_stack *b)
 	int	rotations_to_top_a;
 	int	rr_count;
 
-	rotations_to_top_b = rotations_to_top_count(number, b); // change those 2 lines
+	rotations_to_top_b = rotations_to_top_count(number, b);
 	rotations_to_top_a = rotations_to_top_count(number, a);
 	rr_count = 0;
 	ft_printf("cost to rotate %d to top of b is: %d\n", number, rotations_to_top_b);
