@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/30 13:43:55 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:59:00 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,45 @@ void	sort_stack_of_size_3(t_stack **a)
 		rra(a);
 }
 
+int	number_is_in_stack(int number, t_stack *stack)
+{
+	t_stack	*node;
+
+	node = stack;
+	if (node->value == number)
+		return (1);
+	while (node->next != stack)
+	{
+		node = node->next;
+		if (node->value == number)
+			return (1);
+	}
+	return (0);
+}
+
 int	rotations_to_top_count(int number, t_stack *stack)
 {
 	int		count;
 	t_stack	*current;
+	int		nb_in_stack;
 
 	count = 0;
 	current = stack;
-	while (current->next->value != number)
-		current = current->next;
+	nb_in_stack = number_is_in_stack(number, stack);
+	if (!nb_in_stack && (stack_min(stack)->value > number || stack_max(stack)->value < number))	
+		current = stack_min(stack);
+	else if (!nb_in_stack)
+	{
+		current = stack;
+		while (!(current->value < number && current->next->value > number))
+			current = current->next;
+	}
+	else
+	{
+		current = stack;
+		while (current->value != number)
+			current = current->next;
+	}
 	while (current->next != stack)
 	{
 		current = current->next;
@@ -103,15 +133,18 @@ int	calculate_cost(int number, t_stack *a, t_stack *b)
 	rotations_to_top_b = rotations_to_top_count(number, b);
 	rotations_to_top_a = rotations_to_top_count(number, a);
 	rr_count = 0;
-	ft_printf("cost to rotate %d to top of b is: %d\n", number, rotations_to_top_b);
-	ft_printf("cost to rotate %d to top of a is: %d\n", number, rotations_to_top_a);
+	ft_printf("cost to rotate %d to top of b is: %d\n", number,
+			rotations_to_top_b);
+	ft_printf("cost to rotate %d to top of a is: %d\n", number,
+			rotations_to_top_a);
 	while (rotations_to_top_a > 0 && rotations_to_top_b > 0)
 	{
 		rr_count++;
 		rotations_to_top_a--;
 		rotations_to_top_b--;
 	}
-	ft_printf("simultaneous rr's: %d, new ra: %d, new rb: %d\n", rr_count, rotations_to_top_a, rotations_to_top_b);
+	ft_printf("simultaneous rr's: %d, new ra: %d, new rb: %d\n", rr_count,
+			rotations_to_top_a, rotations_to_top_b);
 	return (rr_count + rotations_to_top_a + rotations_to_top_b + 1);
 }
 
@@ -138,7 +171,7 @@ int	find_cheapest_number(t_stack **a, t_stack **b)
 		current = current->next;
 	}
 	ft_printf("cheapest number is %d with cost of %d\n", cheapest_number,
-		cheapest_cost);
+			cheapest_cost);
 	return (cheapest_number);
 }
 
@@ -250,3 +283,5 @@ int	main(int argc, char **argv)
 //
 // Fix algorithm
 // Fix 0
+//
+// 265 21 219 65 543 9 1
