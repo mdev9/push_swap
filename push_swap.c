@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/31 11:12:00 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:07:49 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	sort_stack_of_size_3(t_stack **stack_a)
 		rra(stack_a);
 }
 
+/*
 void	sort_stack(t_stack **a, t_stack **b)
 {
 	int	size;
@@ -80,6 +81,9 @@ void	sort_stack(t_stack **a, t_stack **b)
 	int	max_bits;
 	int	i;
 	int	j;
+	int	num;
+	int	size;
+	int	i;
 	int	num;
 
 	size = stack_size(a);
@@ -93,6 +97,8 @@ void	sort_stack(t_stack **a, t_stack **b)
 		j = 0;
 		while (j < size)
 		{
+			if (!*a)
+				break ;
 			num = top_node(*a)->value;
 			if (((num >> i) & 1) == 1)
 				ra(a);
@@ -107,6 +113,55 @@ void	sort_stack(t_stack **a, t_stack **b)
 	{
 		pa(a, b);
 		print_stacks(*a, *b);
+	}
+}*/
+void	sort_stack(t_stack **a, t_stack **b)
+{
+	int size;
+	size = stack_size(a);
+	int i;
+	int j;
+	i = 0;
+	int num;
+	while (!stack_is_sorted(*a))
+	{
+		j = 0;
+		while (j < size)
+		{
+			num = top_node(*a)->value;
+			if ((num >> i) & 1)
+				ra(a);
+			else
+				pb(a, b);
+			j++;
+		}
+		i++;
+	}
+	while (*b)
+		pa(a, b);
+}
+
+void	sort_tab(int *tab, int size)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = 0;
+	while (i < size)
+	{
+		j = 0;
+		while (j < size)
+		{
+			if (tab[j] > tab[i])
+			{
+				tmp = tab[i];
+				tab[i] = tab[j];
+				tab[j] = tmp;
+			}
+			j++;
+		}
+		i++;
 	}
 }
 
@@ -130,6 +185,8 @@ int	simplify_stack(t_stack **a)
 		node = node->next;
 		i++;
 	}
+	tmp[i] = node->value;
+	sort_tab(tmp, size);
 	i = 0;
 	node = *a;
 	while (i < size)
