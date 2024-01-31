@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/31 13:07:49 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:36:18 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,25 +208,35 @@ int	simplify_stack(t_stack **a)
 	return (0);
 }
 
+void sort_small_stack(t_stack **a, t_stack **b)
+{
+	while (stack_size(a) != 3)
+		pb(a, b);
+	sort_stack_of_size_3(a);
+	pa(a, b);
+	if (top_node(*a) != stack_min(*a))
+		ra(a);
+	if (*b)
+		pa(a, b);
+	if (top_node(*a) != stack_min(*a))
+		ra(a);
+}
+
 void	push_swap(t_stack **a, t_stack **b)
 {
+	int size;
+
+	size = stack_size(a);
 	if (stack_is_sorted(*a))
 		return ;
-	if (stack_size(a) == 2)
-	{
+	if (size == 2)
 		sa(a);
-		return ;
-	}
-	if (stack_size(a) == 3)
-	{
+	else if (size == 3)
 		sort_stack_of_size_3(a);
-		return ;
-	}
+	else if (size == 4 || size == 5)
+		sort_small_stack(a, b);
 	else
-	{
 		sort_stack(a, b);
-	}
-	(void)b;
 }
 
 int	main(int argc, char **argv)
