@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/31 13:36:18 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:27:16 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,11 @@ void	sort_stack_of_size_3(t_stack **stack_a)
 	if (first < second && second > last && last > first)
 	{
 		sa(stack_a);
-		print_stack(*stack_a);
 		ra(stack_a);
 	}
 	else if (first > second && second > last && last < first)
 	{
 		sa(stack_a);
-		print_stack(*stack_a);
 		rra(stack_a);
 	}
 	else if (first > second && second < last && last > first)
@@ -82,15 +80,13 @@ void	sort_stack(t_stack **a, t_stack **b)
 	int	i;
 	int	j;
 	int	num;
-	int	size;
-	int	i;
-	int	num;
 
 	size = stack_size(a);
 	max_num = size - 1;
 	max_bits = 0;
 	while ((max_num >> max_bits) != 0)
 		++max_bits;
+	ft_printf("max_bits: %d\n", max_bits);
 	i = 0;
 	while (i < max_bits)
 	{
@@ -99,30 +95,35 @@ void	sort_stack(t_stack **a, t_stack **b)
 		{
 			if (!*a)
 				break ;
+			print_stacks(*a, *b);
 			num = top_node(*a)->value;
-			if (((num >> i) & 1) == 1)
+			ft_printf("top: %d\n", num);
+			if ((num >> i) & 1)
 				ra(a);
 			else
 				pb(a, b);
-			print_stacks(*a, *b);
+			//print_stacks(*a, *b);
 			j++;
 		}
 		i++;
+		while (*b)
+		{
+			pa(a, b);
+			//print_stacks(*a, *b);
+		}
 	}
-	while (*b)
-	{
-		pa(a, b);
-		print_stacks(*a, *b);
-	}
-}*/
+}
+
+*/
 void	sort_stack(t_stack **a, t_stack **b)
 {
-	int size;
+	int	size;
+	int	num;
+	int	i;
+	int	j;
+
 	size = stack_size(a);
-	int i;
-	int j;
 	i = 0;
-	int num;
 	while (!stack_is_sorted(*a))
 	{
 		j = 0;
@@ -136,9 +137,11 @@ void	sort_stack(t_stack **a, t_stack **b)
 			j++;
 		}
 		i++;
+		while (*b)
+		{
+			pa(a, b);
+		}
 	}
-	while (*b)
-		pa(a, b);
 }
 
 void	sort_tab(int *tab, int size)
@@ -208,23 +211,25 @@ int	simplify_stack(t_stack **a)
 	return (0);
 }
 
-void sort_small_stack(t_stack **a, t_stack **b)
+void	sort_small_stack(t_stack **a, t_stack **b)
 {
 	while (stack_size(a) != 3)
 		pb(a, b);
 	sort_stack_of_size_3(a);
-	pa(a, b);
+	while (*b)
+	{
+		if (top_node(*b)->value < top_node(*a)->value)
+			pa(a, b);
+		if (*b && top_node(*b)->value > top_node(*a)->value)
+			ra(a);
+	}
 	if (top_node(*a) != stack_min(*a))
-		ra(a);
-	if (*b)
-		pa(a, b);
-	if (top_node(*a) != stack_min(*a))
-		ra(a);
+		rra(a);
 }
 
 void	push_swap(t_stack **a, t_stack **b)
 {
-	int size;
+	int	size;
 
 	size = stack_size(a);
 	if (stack_is_sorted(*a))
@@ -248,12 +253,12 @@ int	main(int argc, char **argv)
 	stack_b = 0;
 	if (parse_argv(argc, argv, &stack_a))
 		return (ft_error(stack_a, stack_b));
-	ft_printf("a: ");
-	print_stack(stack_a);
-	ft_printf("stack sorted: %d\n", stack_is_sorted(stack_a));
+	//ft_printf("a: ");
+	//print_stack(stack_a);
+	//ft_printf("stack sorted: %d\n", stack_is_sorted(stack_a));
 	if (simplify_stack(&stack_a))
 		return (1);
-	print_stack(stack_a);
+	//print_stack(stack_a);
 	push_swap(&stack_a, &stack_b);
 	print_stack(stack_a);
 	ft_printf("stack sorted: %d\n", stack_is_sorted(stack_a));

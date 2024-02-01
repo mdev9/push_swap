@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:29:04 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/27 13:49:58 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:38:01 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_error(t_stack *stack_a, t_stack *stack_b)
 
 int	stack_is_sorted(t_stack *stack)
 {
-	t_stack *node;
+	t_stack	*node;
 
 	if (stack)
 	{

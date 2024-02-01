@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 13:16:37 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/28 12:26:20 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:31:30 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,9 @@ typedef struct s_stack
 int		parse_argv(int argc, char **argv, t_stack **a);
 int		ft_error(t_stack *stack_a, t_stack *stack_b);
 int		check_for_duplicates(t_stack *stack);
-int		convert_to_int(char **char_tab, int *int_tab);
 int		stack_size(t_stack **stack);
 int		stack_is_sorted(t_stack *stack);
-int		free_tabs(char **char_tab, int *int_tab, int error);
+int		free_tabs(char **char_tab, int error);
 t_stack	*top_node(t_stack *stack);
 void	free_stack(t_stack *stack);
 void	print_stack(t_stack *stack);
@@ -45,6 +44,7 @@ void	rr(t_stack **stack_a, t_stack **stack_b);
 void	rra(t_stack **stack_a);
 void	rrb(t_stack **stack_b);
 void	rrr(t_stack **stack_a, t_stack **stack_b);
+int		check_if_str_is_valid(char *str);
 
 
 void			print_stacks(t_stack *stack_a, t_stack *stack_b);
