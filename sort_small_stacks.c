@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:41:47 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/01 17:51:03 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:33:57 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ t_stack	*stack_min(t_stack *stack) // remove ?
 
 	node = stack;
 	while (node->next->value < node->value)
+		node = node->next;
+	return (node);
+}
+
+t_stack	*stack_max(t_stack *stack) // remove ?
+{
+	t_stack	*node;
+
+	node = stack;
+	while (node->next->value > node->value)
 		node = node->next;
 	return (node);
 }
@@ -54,13 +64,21 @@ void	sort_small_stack(t_stack **a, t_stack **b)
 	while (stack_size(a) != 3)
 		pb(a, b);
 	sort_stack_of_size_3(a);
-	while (*b)
+	print_stacks(*a, *b);
+	while ((top_node(*a)->value < top_node(*b)->value) || (top_node(*a) != stack_min(*a) && *a != stack_max(*a)))
+		ra(a);
+	print_stacks(*a, *b);
+	pa(a, b);
+	if (*b)
 	{
-		if (top_node(*b)->value < top_node(*a)->value)
-			pa(a, b);
-		if (*b && top_node(*b)->value > top_node(*a)->value)
+		while (!stack_is_sorted(*a))
 			ra(a);
+		while ((top_node(*a)->value < top_node(*b)->value) || (top_node(*a) != stack_min(*a) && *a != stack_max(*a)))
+			ra(a);
+		print_stacks(*a, *b);
+		pa(a, b);
+		print_stacks(*a, *b);
 	}
-	if (top_node(*a) != stack_min(*a))
-		rra(a);
+	while (!stack_is_sorted(*a))
+		ra(a);
 }

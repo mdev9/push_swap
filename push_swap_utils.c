@@ -6,13 +6,13 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:29:04 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/01 16:38:01 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:34:52 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	print_stack(t_stack *stack)
+void	print_stack(t_stack *stack) //remove
 {
 	t_stack	*node;
 
@@ -27,7 +27,7 @@ void	print_stack(t_stack *stack)
 	ft_printf("%d\n", node->value);
 }
 
-void	print_stacks(t_stack *stack_a, t_stack *stack_b)
+void	print_stacks(t_stack *stack_a, t_stack *stack_b) //remove
 {
 	ft_printf("a: ");
 	print_stack(stack_a);
