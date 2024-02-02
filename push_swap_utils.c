@@ -6,10 +6,11 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:29:04 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/02 10:16:52 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:48:09 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "push_swap.h"
 
 int	stack_size(t_stack **stack)
@@ -55,7 +56,7 @@ void	free_stack(t_stack *stack)
 
 int	ft_error(t_stack *stack_a, t_stack *stack_b)
 {
-	ft_printf("Error\n");
+	ft_putstr_fd("Error\n", 2);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);

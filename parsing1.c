@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/02 14:41:33 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:17:01 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	fill_stack(char **char_tab, t_stack **a)
 	i--;
 	while (i >= 0)
 	{
+		if (ft_strlen(char_tab[i]) == 1 && char_tab[i][0] == '+')
+			return (1);
 		if (create_node_from_str(char_tab[i], a))
 			return (1);
 		i--;
@@ -85,7 +87,7 @@ int	add_arg_to_stack(char *arg, t_stack **a)
 	if (!*char_tab)
 	{
 		free(char_tab);
-		return (0);
+		return (1);
 	}
 	if (fill_stack(char_tab, a))
 		return (free_tab(char_tab, 1));
