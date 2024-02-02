@@ -4,6 +4,8 @@ CC = clang
 
 SRCS =	push_swap.c\
 		push_swap_utils.c\
+		sort_small_stacks.c\
+		simplify.c\
 		parsing1.c\
 		parsing2.c\
 		push.c\

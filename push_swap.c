@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/30 17:59:00 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:13:53 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,21 +242,19 @@ void	sort_stack(t_stack **a, t_stack **b)
 
 void	push_swap(t_stack **a, t_stack **b)
 {
+	int	size;
+
+	size = stack_size(a);
 	if (stack_is_sorted(*a))
 		return ;
-	if (stack_size(a) == 2)
-	{
+	if (size == 2)
 		sa(a);
-		return ;
-	}
-	if (stack_size(a) == 3)
-	{
+	else if (size == 3)
 		sort_stack_of_size_3(a);
-		return ;
-	}
+	else if (size == 4 || size == 5)
+		sort_small_stack(a, b);
 	else
 		sort_stack(a, b);
-	(void)b;
 }
 
 int	main(int argc, char **argv)
@@ -268,20 +266,10 @@ int	main(int argc, char **argv)
 	stack_b = 0;
 	if (parse_argv(argc, argv, &stack_a))
 		return (ft_error(stack_a, stack_b));
-	ft_printf("a: ");
-	print_stack(stack_a);
-	ft_printf("stack sorted: %d\n", stack_is_sorted(stack_a));
+	if (simplify_stack(&stack_a))
+		return (1);
 	push_swap(&stack_a, &stack_b);
-	print_stack(stack_a);
-	ft_printf("stack sorted: %d\n", stack_is_sorted(stack_a));
 	free_stack(stack_a);
 	free_stack(stack_b);
-	return (0);
+	return (0)
 }
-
-// Todo:
-//
-// Fix algorithm
-// Fix 0
-//
-// 265 21 219 65 543 9 1

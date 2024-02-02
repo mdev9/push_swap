@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 21:21:53 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/23 21:26:42 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:02:31 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	swap_big_stack(t_stack **stack)
 	first->next = last->next;
 	second->next = last;
 	last->next = first;
-	//*stack = first;
 }
 
 void	swap(t_stack **stack)

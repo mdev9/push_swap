@@ -6,35 +6,12 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:29:04 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/01/27 13:49:58 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:48:09 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "push_swap.h"
-
-void	print_stack(t_stack *stack)
-{
-	t_stack	*node;
-
-	if (!stack)
-		return ;
-	node = stack;
-	while (node->next && stack != node->next)
-	{
-		ft_printf("%d, ", node->value);
-		node = node->next;
-	}
-	ft_printf("%d\n", node->value);
-}
-
-void	print_stacks(t_stack *stack_a, t_stack *stack_b)
-{
-	ft_printf("a: ");
-	print_stack(stack_a);
-	ft_printf("b: ");
-	print_stack(stack_b);
-	ft_printf("\n");
-}
 
 int	stack_size(t_stack **stack)
 {
@@ -79,7 +56,7 @@ void	free_stack(t_stack *stack)
 
 int	ft_error(t_stack *stack_a, t_stack *stack_b)
 {
-	ft_printf("Error\n");
+	ft_putstr_fd("Error\n", 2);
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
@@ -87,7 +64,7 @@ int	ft_error(t_stack *stack_a, t_stack *stack_b)
 
 int	stack_is_sorted(t_stack *stack)
 {
-	t_stack *node;
+	t_stack	*node;
 
 	if (stack)
 	{
