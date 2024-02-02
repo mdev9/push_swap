@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/02 10:55:24 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 14:41:33 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	new_node(int value, t_stack **new)
 
 int	create_node_from_str(char *str, t_stack **a)
 {
-	t_stack	*node;
-	int		nb;
+	t_stack		*node;
+	long long	nb;
 
 	if (check_if_str_is_valid(str))
 		return (1);
