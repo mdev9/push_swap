@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:46:34 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/01 18:06:38 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:09:43 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int	simplify_stack(t_stack **a)
 	int	*tmp;
 	int	size;
 
+	if (!*a)
+		return (0);
 	size = stack_size(a);
 	tmp = calloc(size, sizeof(int *));
 	if (!tmp)
