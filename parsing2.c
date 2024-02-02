@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 22:21:23 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/01 17:15:51 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:55:52 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_for_duplicates(t_stack *stack)
 	return (0);
 }
 
-int	free_tabs(char **char_tab, int error)
+int	free_tab(char **char_tab, int error)
 {
 	int	i;
 

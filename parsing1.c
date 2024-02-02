@@ -6,11 +6,10 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:49:01 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/01 17:36:32 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:55:24 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "push_swap.h"
 
 int	new_node(int value, t_stack **new)
@@ -89,8 +88,8 @@ int	add_arg_to_stack(char *arg, t_stack **a)
 		return (0);
 	}
 	if (fill_stack(char_tab, a))
-		return (free_tabs(char_tab, 1));
-	return (free_tabs(char_tab, 0));
+		return (free_tab(char_tab, 1));
+	return (free_tab(char_tab, 0));
 }
 
 int	parse_argv(int argc, char **argv, t_stack **a)

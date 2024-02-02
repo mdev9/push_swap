@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/01 18:20:51 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:13:53 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,9 @@ int	main(int argc, char **argv)
 	stack_b = 0;
 	if (parse_argv(argc, argv, &stack_a))
 		return (ft_error(stack_a, stack_b));
-	//ft_printf("a: ");
-	//print_stack(stack_a);
-	//ft_printf("stack sorted: %d\n", stack_is_sorted(stack_a));
 	if (simplify_stack(&stack_a))
 		return (1);
-	print_stack(stack_a);
 	push_swap(&stack_a, &stack_b);
-	print_stack(stack_a);
-	ft_printf("stack sorted: %d\n", stack_is_sorted(stack_a));
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
