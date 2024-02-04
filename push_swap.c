@@ -6,7 +6,7 @@
 /*   By: marde-vr <marde-vr@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:45:08 by marde-vr          #+#    #+#             */
-/*   Updated: 2024/02/02 10:13:53 by marde-vr         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:51:07 by marde-vr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,227 +17,40 @@ t_stack	*top_node(t_stack *stack)
 	t_stack	*top_node;
 
 	if (!stack)
-		return (0);
+		return (NULL);
 	top_node = stack;
 	while (top_node->next != stack)
 		top_node = top_node->next;
 	return (top_node);
 }
 
-t_stack	*stack_min(t_stack *stack)
-{
-	t_stack	*node;
-
-	if (!stack)
-		return (0);
-	node = stack;
-	while (node->next->value < node->value)
-		node = node->next;
-	return (node);
-}
-
-t_stack	*stack_max(t_stack *stack)
-{
-	t_stack	*node;
-
-	if (!stack)
-		return (0);
-	node = stack;
-	while (node->next->value > node->value)
-		node = node->next;
-	return (node);
-}
-
-void	sort_stack_of_size_3(t_stack **a)
-{
-	int	first;
-	int	second;
-	int	last;
-
-	first = (*a)->next->next->value;
-	second = (*a)->next->value;
-	last = (*a)->value;
-	if (first < second && second > last && last > first)
-	{
-		sa(a);
-		print_stack(*a);
-		ra(a);
-	}
-	else if (first > second && second > last && last < first)
-	{
-		sa(a);
-		print_stack(*a);
-		rra(a);
-	}
-	else if (first > second && second < last && last > first)
-		sa(a);
-	else if (first > second && second < last && last < first)
-		ra(a);
-	else if (first < second && second > last && last < first)
-		rra(a);
-}
-
-int	number_is_in_stack(int number, t_stack *stack)
-{
-	t_stack	*node;
-
-	node = stack;
-	if (node->value == number)
-		return (1);
-	while (node->next != stack)
-	{
-		node = node->next;
-		if (node->value == number)
-			return (1);
-	}
-	return (0);
-}
-
-int	rotations_to_top_count(int number, t_stack *stack)
-{
-	int		count;
-	t_stack	*current;
-	int		nb_in_stack;
-
-	count = 0;
-	current = stack;
-	nb_in_stack = number_is_in_stack(number, stack);
-	if (!nb_in_stack && (stack_min(stack)->value > number || stack_max(stack)->value < number))	
-		current = stack_min(stack);
-	else if (!nb_in_stack)
-	{
-		current = stack;
-		while (!(current->value < number && current->next->value > number))
-			current = current->next;
-	}
-	else
-	{
-		current = stack;
-		while (current->value != number)
-			current = current->next;
-	}
-	while (current->next != stack)
-	{
-		current = current->next;
-		count++;
-	}
-	return (count);
-}
-
-int	calculate_cost(int number, t_stack *a, t_stack *b)
-{
-	int	rotations_to_top_b;
-	int	rotations_to_top_a;
-	int	rr_count;
-
-	rotations_to_top_b = rotations_to_top_count(number, b);
-	rotations_to_top_a = rotations_to_top_count(number, a);
-	rr_count = 0;
-	ft_printf("cost to rotate %d to top of b is: %d\n", number,
-			rotations_to_top_b);
-	ft_printf("cost to rotate %d to top of a is: %d\n", number,
-			rotations_to_top_a);
-	while (rotations_to_top_a > 0 && rotations_to_top_b > 0)
-	{
-		rr_count++;
-		rotations_to_top_a--;
-		rotations_to_top_b--;
-	}
-	ft_printf("simultaneous rr's: %d, new ra: %d, new rb: %d\n", rr_count,
-			rotations_to_top_a, rotations_to_top_b);
-	return (rr_count + rotations_to_top_a + rotations_to_top_b + 1);
-}
-
-int	find_cheapest_number(t_stack **a, t_stack **b)
-{
-	int		cheapest_number;
-	int		cheapest_cost;
-	t_stack	*current;
-	int		current_cost;
-
-	cheapest_number = (*a)->value;
-	cheapest_cost = calculate_cost((*a)->value, *a, *b);
-	ft_printf("cost to push %d: %d\n\n", (*a)->value, cheapest_cost);
-	current = (*a)->next;
-	while (current != *a)
-	{
-		current_cost = calculate_cost(current->value, *a, *b);
-		ft_printf("cost to push %d: %d\n\n", current->value, current_cost);
-		if (current_cost < cheapest_cost)
-		{
-			cheapest_number = current->value;
-			cheapest_cost = current_cost;
-		}
-		current = current->next;
-	}
-	ft_printf("cheapest number is %d with cost of %d\n", cheapest_number,
-			cheapest_cost);
-	return (cheapest_number);
-}
-
-void	push_cheapest_number(t_stack **a, t_stack **b)
-{
-	int	cheapest_number;
-
-	cheapest_number = find_cheapest_number(a, b);
-	while (*a && (*a)->value != cheapest_number && *b
-		&& (*b)->value > cheapest_number)
-	{
-		rr(a, b);
-		print_stacks(*a, *b);
-	}
-	while (*a && (*a)->value != cheapest_number)
-	{
-		ra(a);
-		print_stacks(*a, *b);
-	}
-	while (*b && (*b)->value > cheapest_number)
-	{
-		rb(b);
-		print_stacks(*a, *b);
-	}
-	pb(a, b);
-	print_stacks(*a, *b);
-}
-
-void	push_back_to_a(t_stack **a, t_stack **b)
-{
-	int	rotations_needed;
-	int	number;
-
-	rotations_needed = 0;
-	while (*b)
-	{
-		number = (*b)->value;
-		rotations_needed = rotations_to_top_count(number, *a);
-		while (rotations_needed > 0)
-		{
-			ra(a);
-			print_stacks(*a, *b);
-			rotations_needed--;
-		}
-		pa(a, b);
-		print_stacks(*a, *b);
-	}
-}
-
 void	sort_stack(t_stack **a, t_stack **b)
 {
-	int	a_size;
+	int	size;
+	int	num;
+	int	i;
+	int	j;
 
-	pb(a, b);
-	print_stacks(*a, *b);
-	pb(a, b);
-	print_stacks(*a, *b);
-	a_size = stack_size(a);
-	while (a_size > 3)
+	size = stack_size(a);
+	i = 0;
+	while (!stack_is_sorted(*a))
 	{
-		push_cheapest_number(a, b);
-		a_size--;
+		j = 0;
+		while (j < size)
+		{
+			num = top_node(*a)->value;
+			if ((num >> i) & 1)
+				ra(a);
+			else
+				pb(a, b);
+			j++;
+		}
+		i++;
+		while (*b)
+		{
+			pa(a, b);
+		}
 	}
-	sort_stack_of_size_3(a);
-	push_back_to_a(a, b);
-	// bring minimim number of the stack at top;
 }
 
 void	push_swap(t_stack **a, t_stack **b)
@@ -271,5 +84,5 @@ int	main(int argc, char **argv)
 	push_swap(&stack_a, &stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);
-	return (0)
+	return (0);
 }
